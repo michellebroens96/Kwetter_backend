@@ -1,4 +1,4 @@
-package Kwetter.DAO;
+package Kwetter.DAO.user;
 
 import Kwetter.utility.HibernateSessionFactory;
 
