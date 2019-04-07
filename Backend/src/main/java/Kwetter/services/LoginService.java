@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @RequestScoped
-@Named("Login")
+@Named("LoginService")
 @Default
 public class LoginService
 {
