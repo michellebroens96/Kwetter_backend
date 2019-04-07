@@ -28,16 +28,16 @@ public class LoginDAO implements ILoginDAO
     }
 
     public User checkUsername(String username){
-        User userEntity = null;
+        User user = null;
 
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("username"), username));
-        userEntity = session.createQuery(criteriaQuery).uniqueResult();
+        user = session.createQuery(criteriaQuery).uniqueResult();
 
-        return userEntity;
+        return user;
     }
 
     public User login(String username, String password)
