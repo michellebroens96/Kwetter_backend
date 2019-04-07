@@ -25,7 +25,7 @@ public class UserController
         userService.follow(followedId, followerId);
         return "success";
     }
-
+    
     @GET
     @Produces(TEXT_PLAIN)
     public Response GetUser(@PathParam("visitedId") int visitedId)
