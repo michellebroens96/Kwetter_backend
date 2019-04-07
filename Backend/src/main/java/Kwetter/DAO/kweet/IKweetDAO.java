@@ -8,5 +8,9 @@ public interface IKweetDAO
 {
     void createKweet(int userid, String content);
 
-    public List<KweetDTO> searchKweet(String searchContent);
+    List<KweetDTO> searchKweet(String searchContent);
+
+    List<KweetDTO> getTimeLine(int userId);
+
+    List<KweetDTO> getRecentKweets(int userId);
 }

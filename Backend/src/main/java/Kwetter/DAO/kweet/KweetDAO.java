@@ -10,6 +10,9 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,5 +54,48 @@ public class KweetDAO implements IKweetDAO
             kweets.add(new KweetDTO(kweet));
         }
         return kweets;
+    }
+
+    @Override
+    public List<KweetDTO> getTimeLine(int userId)
+    {
+        Session session = sessionFactory.getCurrentSession();
+        User user = session.get(User.class, userId);
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Kweet> criteriaQuery = criteriaBuilder.createQuery(Kweet.class);
+        Root<Kweet> root = criteriaQuery.from(Kweet.class);
+        criteriaQuery.select(root).where(criteriaBuilder.or(criteriaBuilder.equal(root.get("user"), user)));
+        List<Kweet> kweets = session.createQuery(criteriaQuery).getResultList();
+
+        for (User userEntity : user.getFollowing())
+        {
+            criteriaQuery.select(root).where(criteriaBuilder.or(criteriaBuilder.equal(root.get("user"), userEntity)));
+            kweets.addAll(session.createQuery(criteriaQuery).getResultList());
+        }
+        List<KweetDTO> kweetsDTO = new ArrayList<>();
+
+        for (Kweet kweet : kweets)
+        {
+            kweetsDTO.add(new KweetDTO(kweet));
+        }
+        return kweetsDTO;
+    }
+
+    @Override
+    public List<KweetDTO> getRecentKweets(int userId)
+    {
+        Session session = sessionFactory.getCurrentSession();
+        User user = session.get(User.class, userId);
+
+        List<Kweet> kweets = session.createQuery("from Kweet where user = :user ORDER BY date ASC ").setParameter("user", userDAO.getUserById(userId)).setMaxResults(10).getResultList();
+
+        List<KweetDTO> kweetsDTO = new ArrayList<>();
+
+        for (Kweet kweet : kweets)
+        {
+            kweetsDTO.add(new KweetDTO(kweet));
+        }
+        return kweetsDTO;
     }
 }

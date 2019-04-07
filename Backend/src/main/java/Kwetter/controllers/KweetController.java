@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
@@ -12,7 +13,8 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class KweetController
 {
     @Inject
-    KweetService kweetService;
+    private KweetService kweetService;
+    private Gson gson = new Gson();
 
     @PUT
     @Path("{userId}")
@@ -27,9 +29,29 @@ public class KweetController
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public String SearchKweet(String searchContent){
+    public String SearchKweet(String searchContent)
+    {
         Gson gson = new Gson();
         return gson.toJson(kweetService.searchKweet(searchContent));
+    }
 
+    @GET
+    @Path("timeline/{userId}")
+    @Produces(APPLICATION_JSON)
+    public Response GetTimeLine(@PathParam("userId") int userId)
+    {
+        Gson gson = new Gson();
+
+        String json = gson.toJson(kweetService.getTimeLine(userId));
+        return Response.ok(json).build();
+    }
+
+    @GET
+    @Path("latest/{visitedId}")
+    @Produces(APPLICATION_JSON)
+    public Response getLatestKweets(@PathParam("visitedId") int visitedId)
+    {
+        gson.toJson(kweetService.getRecentKweets(visitedId));
+        return Response.ok(gson).build();
     }
 }
