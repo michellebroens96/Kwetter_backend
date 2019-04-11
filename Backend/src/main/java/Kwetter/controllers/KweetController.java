@@ -20,9 +20,9 @@ public class KweetController
     @Path("{userId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public void createKweet(@PathParam("userId") int userid, String content)
+    public void createKweet(@PathParam("userId") int userId, String content)
     {
-        kweetService.createKweet(userid, content);
+        kweetService.createKweet(userId, content);
     }
 
     @Path("search")
