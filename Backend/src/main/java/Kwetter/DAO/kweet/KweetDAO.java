@@ -47,7 +47,7 @@ public class KweetDAO implements IKweetDAO
     {
         Session session = sessionFactory.getCurrentSession();
         List<KweetDTO> kweets = new ArrayList<>();
-        Query query = session.createQuery("FROM Kweet k WHERE k.content LIKE '" + searchContent + "'");
+        Query query = session.createQuery("from Kweet k where k.content like '%'||k.content||'%'");
 
         for (Kweet kweet : (List<Kweet>) query.getResultList())
         {
