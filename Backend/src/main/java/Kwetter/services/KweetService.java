@@ -32,8 +32,8 @@ public class KweetService
         return kweetDAO.getTimeLine(userId);
     }
 
-    public List<KweetDTO> getRecentKweets(int userId)
+    public List<KweetDTO> getLatestKweets(int userId)
     {
-        return kweetDAO.getRecentKweets(userId);
+        return kweetDAO.getLatestKweets(userId);
     }
 }

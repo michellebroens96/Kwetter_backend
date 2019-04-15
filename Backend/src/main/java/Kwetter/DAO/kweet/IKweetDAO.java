@@ -12,5 +12,5 @@ public interface IKweetDAO
 
     List<KweetDTO> getTimeLine(int userId);
 
-    List<KweetDTO> getRecentKweets(int userId);
+    List<KweetDTO> getLatestKweets(int userId);
 }

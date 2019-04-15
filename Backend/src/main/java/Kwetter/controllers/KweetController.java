@@ -14,7 +14,6 @@ public class KweetController
 {
     @Inject
     private KweetService kweetService;
-    private Gson gson = new Gson();
 
     @PUT
     @Path("{userId}")
@@ -47,11 +46,13 @@ public class KweetController
     }
 
     @GET
-    @Path("latest/{visitedId}")
+    @Path("{visitedId}/latestKweets")
     @Produces(APPLICATION_JSON)
     public Response getLatestKweets(@PathParam("visitedId") int visitedId)
     {
-        gson.toJson(kweetService.getRecentKweets(visitedId));
+        Gson gson = new Gson();
+
+        gson.toJson(kweetService.getLatestKweets(visitedId));
         return Response.ok(gson).build();
     }
 }

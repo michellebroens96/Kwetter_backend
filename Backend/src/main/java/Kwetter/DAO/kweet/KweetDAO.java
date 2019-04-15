@@ -83,12 +83,13 @@ public class KweetDAO implements IKweetDAO
     }
 
     @Override
-    public List<KweetDTO> getRecentKweets(int userId)
+    public List<KweetDTO> getLatestKweets(int userId)
     {
         Session session = sessionFactory.getCurrentSession();
         User user = session.get(User.class, userId);
 
-        List<Kweet> kweets = session.createQuery("from Kweet where user = :user ORDER BY date ASC ").setParameter("user", userDAO.getUserById(userId)).setMaxResults(10).getResultList();
+        List<Kweet> kweets = session.createQuery("from Kweet where user = :user ORDER BY date ASC ")
+                .setParameter("user", userDAO.getUserById(userId)).setMaxResults(10).getResultList();
 
         List<KweetDTO> kweetsDTO = new ArrayList<>();
 
