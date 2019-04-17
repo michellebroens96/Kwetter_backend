@@ -12,8 +12,8 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
 @Path("/profilepage/{visitedId}")
-public class UserController
-{
+public class UserController {
+
     @Inject
     private UserService userService;
     private Gson gson = new Gson();
@@ -21,15 +21,14 @@ public class UserController
     @Path("{visitorId}")
     @POST
     @Produces(TEXT_PLAIN)
-    public String followUser(@PathParam("visitorId") int followedId, @PathParam("visitedId") int followerId){
+    public String followUser(@PathParam("visitorId") int followedId, @PathParam("visitedId") int followerId) {
         userService.follow(followedId, followerId);
         return "success";
     }
 
     @GET
     @Produces(TEXT_PLAIN)
-    public Response GetUser(@PathParam("visitedId") int visitedId)
-    {
+    public Response GetUser(@PathParam("visitedId") int visitedId) {
         String userJson = gson.toJson(userService.getUserById(visitedId));
         return Response.ok(userJson).build();
     }
@@ -38,11 +37,10 @@ public class UserController
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response EditProfile(@PathParam("visitorId") int visitorId, @PathParam("visitedId") int visitedId, String profileInfoJson)
-    {
+    public Response EditProfile(@PathParam("visitorId") int visitorId, @PathParam("visitedId") int visitedId,
+                                String profileInfoJson) {
         String json = "";
-        if (visitedId == visitorId)
-        {
+        if(visitedId == visitorId) {
             UserDTO user = gson.fromJson(profileInfoJson, UserDTO.class);
             json = gson.toJson(userService.editUser(visitorId, user));
         }
