@@ -64,7 +64,7 @@ public class KweetDAO implements IKweetDAO {
         criteriaQuery.select(root).where(criteriaBuilder.or(criteriaBuilder.equal(root.get("user"), user)));
         List<Kweet> kweets = session.createQuery(criteriaQuery).getResultList();
 
-        for(Use r userEntity : user.getFollowing()) {
+        for(User userEntity : user.getFollowing()) {
             criteriaQuery.select(root).where(criteriaBuilder.or(criteriaBuilder.equal(root.get("user"), userEntity)));
             kweets.addAll(session.createQuery(criteriaQuery).getResultList());
         }
