@@ -18,16 +18,15 @@ import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class KweetDAO implements IKweetDAO
-{
+public class KweetDAO implements IKweetDAO {
+
     @Inject
     private HibernateSessionFactory sessionFactory;
 
     @Inject
     private UserDAO userDAO;
 
-    public void createKweet(int userid, String content)
-    {
+    public void createKweet(int userid, String content) {
         Kweet kweet = new Kweet();
         User user = new User();
         user.setUserId(userid);
@@ -43,22 +42,19 @@ public class KweetDAO implements IKweetDAO
     }
 
     @Override
-    public List<KweetDTO> searchKweet(String searchContent)
-    {
+    public List<KweetDTO> searchKweet(String searchContent) {
         Session session = sessionFactory.getCurrentSession();
         List<KweetDTO> kweets = new ArrayList<>();
         Query query = session.createQuery("from Kweet k where k.content like '%'||k.content||'%'");
 
-        for (Kweet kweet : (List<Kweet>) query.getResultList())
-        {
+        for(Kweet kweet : (List<Kweet>) query.getResultList()) {
             kweets.add(new KweetDTO(kweet));
         }
         return kweets;
     }
 
     @Override
-    public List<KweetDTO> getTimeLine(int userId)
-    {
+    public List<KweetDTO> getTimeLine(int userId) {
         Session session = sessionFactory.getCurrentSession();
         User user = session.get(User.class, userId);
 
@@ -68,33 +64,30 @@ public class KweetDAO implements IKweetDAO
         criteriaQuery.select(root).where(criteriaBuilder.or(criteriaBuilder.equal(root.get("user"), user)));
         List<Kweet> kweets = session.createQuery(criteriaQuery).getResultList();
 
-        for (User userEntity : user.getFollowing())
-        {
+        for(Use r userEntity : user.getFollowing()) {
             criteriaQuery.select(root).where(criteriaBuilder.or(criteriaBuilder.equal(root.get("user"), userEntity)));
             kweets.addAll(session.createQuery(criteriaQuery).getResultList());
         }
         List<KweetDTO> kweetsDTO = new ArrayList<>();
 
-        for (Kweet kweet : kweets)
-        {
+        for(Kweet kweet : kweets) {
             kweetsDTO.add(new KweetDTO(kweet));
         }
         return kweetsDTO;
     }
 
     @Override
-    public List<KweetDTO> getLatestKweets(int userId)
-    {
+    public List<KweetDTO> getLatestKweets(int userId) {
         Session session = sessionFactory.getCurrentSession();
         User user = session.get(User.class, userId);
 
         List<Kweet> kweets = session.createQuery("from Kweet where user = :user ORDER BY date ASC ")
-                .setParameter("user", userDAO.getUserById(userId)).setMaxResults(10).getResultList();
+                                    .setParameter("user", userDAO.getUserById(userId)).setMaxResults(10)
+                                    .getResultList();
 
         List<KweetDTO> kweetsDTO = new ArrayList<>();
 
-        for (Kweet kweet : kweets)
-        {
+        for(Kweet kweet : kweets) {
             kweetsDTO.add(new KweetDTO(kweet));
         }
         return kweetsDTO;

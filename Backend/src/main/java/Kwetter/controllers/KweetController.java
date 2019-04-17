@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/kweet")
-public class KweetController
-{
+public class KweetController {
+
     @Inject
     private KweetService kweetService;
 
@@ -19,8 +19,7 @@ public class KweetController
     @Path("{userId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public void createKweet(@PathParam("userId") int userId, String content)
-    {
+    public void createKweet(@PathParam("userId") int userId, String content) {
         kweetService.createKweet(userId, content);
     }
 
@@ -28,8 +27,7 @@ public class KweetController
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public String SearchKweet(String searchContent)
-    {
+    public String SearchKweet(String searchContent) {
         Gson gson = new Gson();
         return gson.toJson(kweetService.searchKweet(searchContent));
     }
@@ -37,8 +35,7 @@ public class KweetController
     @GET
     @Path("timeline/{userId}")
     @Produces(APPLICATION_JSON)
-    public Response GetTimeLine(@PathParam("userId") int userId)
-    {
+    public Response GetTimeLine(@PathParam("userId") int userId) {
         Gson gson = new Gson();
 
         String json = gson.toJson(kweetService.getTimeLine(userId));
@@ -48,8 +45,7 @@ public class KweetController
     @GET
     @Path("{visitedId}/latestKweets")
     @Produces(APPLICATION_JSON)
-    public Response getLatestKweets(@PathParam("visitedId") int visitedId)
-    {
+    public Response getLatestKweets(@PathParam("visitedId") int visitedId) {
         Gson gson = new Gson();
 
         gson.toJson(kweetService.getLatestKweets(visitedId));
