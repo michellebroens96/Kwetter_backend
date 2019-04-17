@@ -4,8 +4,8 @@ import Kwetter.DTO.KweetDTO;
 
 import java.util.List;
 
-public interface IKweetDAO
-{
+public interface IKweetDAO {
+
     void createKweet(int userid, String content);
 
     List<KweetDTO> searchKweet(String searchContent);

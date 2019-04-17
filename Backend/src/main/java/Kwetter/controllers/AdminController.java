@@ -1,4 +1,3 @@
 package Kwetter.controllers;
 
-public class AdminController
-{}
+public class AdminController {}

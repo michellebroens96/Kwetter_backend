@@ -3,5 +3,4 @@ package Kwetter.beans;
 import javax.ejb.Stateless;
 
 @Stateless
-public class UserBean
-{ }
+public class UserBean {}
