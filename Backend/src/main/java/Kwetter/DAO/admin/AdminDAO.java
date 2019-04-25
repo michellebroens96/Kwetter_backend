@@ -1,3 +1,18 @@
 package Kwetter.DAO.admin;
 
-public class AdminDAO {}
+import Kwetter.models.User;
+
+import java.util.List;
+
+public class AdminDAO implements IAdminDAO {
+
+    @Override
+    public boolean deleteKweet() {
+        return false;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+}

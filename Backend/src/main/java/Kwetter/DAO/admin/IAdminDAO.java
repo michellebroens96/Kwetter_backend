@@ -1,3 +1,12 @@
 package Kwetter.DAO.admin;
 
-public interface IAdminDAO {}
+import Kwetter.models.User;
+
+import java.util.List;
+
+public interface IAdminDAO {
+
+    boolean deleteKweet();
+
+    List<User> getAllUsers();
+}

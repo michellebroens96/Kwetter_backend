@@ -9,4 +9,6 @@ public interface ILoginDAO
     User checkUsername(String username);
 
     User login(String username, String password);
+
+    boolean logout();
 }

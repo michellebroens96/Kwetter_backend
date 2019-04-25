@@ -11,12 +11,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 @Stateless
-public class LoginDAO implements ILoginDAO
-{
+public class LoginDAO implements ILoginDAO {
+
     @Inject
     private HibernateSessionFactory sessionFactory;
 
-    public User register(String username, String password){
+    @Override
+    public User register(String username, String password) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -27,7 +28,8 @@ public class LoginDAO implements ILoginDAO
         return user;
     }
 
-    public User checkUsername(String username){
+    @Override
+    public User checkUsername(String username) {
         User user = null;
 
         Session session = sessionFactory.getCurrentSession();
@@ -40,18 +42,23 @@ public class LoginDAO implements ILoginDAO
         return user;
     }
 
-    public User login(String username, String password)
-    {
+    @Override
+    public User login(String username, String password) {
         User user = null;
 
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("username"), username), criteriaBuilder.equal(root.get("password"), password));
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("username"), username),
+                                         criteriaBuilder.equal(root.get("password"), password));
         user = session.createQuery(criteriaQuery).uniqueResult();
 
         return user;
     }
 
+    @Override
+    public boolean logout() {
+        return false;
+    }
 }

@@ -11,24 +11,23 @@ import javax.inject.Named;
 @RequestScoped
 @Named("LoginService")
 @Default
-public class LoginService
-{
+public class LoginService {
+
     @Inject
     private ILoginDAO loginDAO;
 
-    public User register(String username, String password)
-    {
+    public User register(String username, String password) {
         return loginDAO.register(username, password);
     }
 
-    public User checkUsername(String username)
-    {
+    public User checkUsername(String username) {
         return loginDAO.checkUsername(username);
     }
 
-    public User login(String username, String password)
-    {
+    public User login(String username, String password) {
         return loginDAO.login(username, password);
     }
+
+    public boolean logout() {return loginDAO.logout();}
 
 }
