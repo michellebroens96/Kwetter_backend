@@ -21,9 +21,9 @@ public class UserController {
     @Path("{visitorId}")
     @POST
     @Produces(TEXT_PLAIN)
-    public String followUser(@PathParam("visitorId") int followedId, @PathParam("visitedId") int followerId) {
+    public Response followUser(@PathParam("visitorId") int followedId, @PathParam("visitedId") int followerId) {
         userService.follow(followedId, followerId);
-        return "success";
+        return Response.ok().build();
     }
 
     @GET
