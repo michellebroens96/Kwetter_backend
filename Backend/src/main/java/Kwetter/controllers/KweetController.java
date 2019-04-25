@@ -43,12 +43,12 @@ public class KweetController {
     }
 
     @GET
-    @Path("{visitedId}/latestKweets")
+    @Path("/latestKweets/{userId}")
     @Produces(APPLICATION_JSON)
-    public Response getLatestKweets(@PathParam("visitedId") int visitedId) {
+    public Response getLatestKweets(@PathParam("userId") int userId) {
         Gson gson = new Gson();
 
-        gson.toJson(kweetService.getLatestKweets(visitedId));
-        return Response.ok(gson).build();
+        String json = gson.toJson(kweetService.getLatestKweets(userId));
+        return Response.ok(json).build();
     }
 }

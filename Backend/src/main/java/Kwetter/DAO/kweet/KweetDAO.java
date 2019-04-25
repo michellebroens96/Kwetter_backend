@@ -81,7 +81,7 @@ public class KweetDAO implements IKweetDAO {
         Session session = sessionFactory.getCurrentSession();
         User user = session.get(User.class, userId);
 
-        List<Kweet> kweets = session.createQuery("from Kweet where user = :user ORDER BY date ASC ")
+        List<Kweet> kweets = session.createQuery("from Kweet k where user = :user ORDER BY date ASC")
                                     .setParameter("user", userDAO.getUserById(userId)).setMaxResults(10)
                                     .getResultList();
 
