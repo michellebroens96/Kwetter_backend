@@ -1,15 +1,15 @@
 package Kwetter.DAO.kweet;
 
-import Kwetter.DAO.user.UserDAO;
+import Kwetter.DAO.user.IUserDAO;
 import Kwetter.DTO.KweetDTO;
 import Kwetter.models.Kweet;
 import Kwetter.models.User;
 import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,15 +18,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Stateless
-@Default
+@RequestScoped
+@Named
 public class KweetDAO implements IKweetDAO {
 
     @Inject
     private HibernateSessionFactory sessionFactory;
 
     @Inject
-    private UserDAO userDAO;
+    private IUserDAO userDAO;
 
     public void createKweet(int userid, String content) {
         Kweet kweet = new Kweet();

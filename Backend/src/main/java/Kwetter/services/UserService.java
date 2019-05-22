@@ -11,7 +11,6 @@ import javax.inject.Named;
 
 @RequestScoped
 @Named("UserService")
-@Default
 public class UserService
 {
     @Inject

@@ -5,6 +5,7 @@ import Kwetter.models.User;
 import javax.enterprise.inject.Default;
 import java.util.List;
 
+
 @Default
 public class AdminDAO implements IAdminDAO {
 

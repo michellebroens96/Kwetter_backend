@@ -5,13 +5,14 @@ import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-@Stateless
+@RequestScoped
 @Default
 public class LoginDAO implements ILoginDAO {
 
