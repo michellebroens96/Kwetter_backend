@@ -8,6 +8,7 @@ import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Stateless
+@Default
 public class KweetDAO implements IKweetDAO {
 
     @Inject

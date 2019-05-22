@@ -5,10 +5,12 @@ import Kwetter.models.User;
 import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
+import javax.enterprise.inject.Default;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
+@Default
 public class UserDAO implements IUserDAO
 {
     @Inject
