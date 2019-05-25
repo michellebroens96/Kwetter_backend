@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        jdk '11'
+        jdk '8'
     }
     options {
         skipStagesAfterUnstable()
