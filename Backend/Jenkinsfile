@@ -18,13 +18,13 @@ pipeline {
          }
         stage('Test') {
             steps {
-                sh 'mvn -f ./pom.xml clean test'
+                sh 'mvn -f ./Backend/pom.xml clean test'
             }
         }
 
         stage('Package') {
             steps {
-                sh 'mvn -f ./pom.xml -B -DskipTests package'
+                sh 'mvn -f ./Backend/pom.xml -B -DskipTests package'
             }
         }
 
