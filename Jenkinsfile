@@ -30,7 +30,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build . -t michellebroens/kwetter_backend:test'
+                sh 'docker build . -t michellebroens/Backend/kwetter_backend:test'
             }
         }
         stage('Docker publish') {
