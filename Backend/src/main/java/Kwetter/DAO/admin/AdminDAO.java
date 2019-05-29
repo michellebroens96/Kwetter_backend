@@ -2,10 +2,12 @@ package Kwetter.DAO.admin;
 
 import Kwetter.models.User;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import java.util.List;
 
 
+@RequestScoped
 @Default
 public class AdminDAO implements IAdminDAO {
 

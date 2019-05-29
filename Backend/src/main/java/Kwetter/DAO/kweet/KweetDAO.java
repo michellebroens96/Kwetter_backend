@@ -8,6 +8,7 @@ import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Query;
@@ -19,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @RequestScoped
-@Named
+@Default
 public class KweetDAO implements IKweetDAO {
 
     @Inject
