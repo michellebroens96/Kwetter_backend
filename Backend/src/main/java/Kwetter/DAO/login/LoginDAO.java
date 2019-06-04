@@ -4,7 +4,6 @@ import Kwetter.models.User;
 import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -59,6 +58,12 @@ public class LoginDAO implements ILoginDAO {
 
         return user;
     }
+
+    @Override
+    public boolean checkToken(String token) {
+        return false;
+    }
+
 
     @Override
     public boolean logout() {

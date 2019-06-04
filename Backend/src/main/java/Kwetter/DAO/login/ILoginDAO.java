@@ -10,5 +10,7 @@ public interface ILoginDAO
 
     User login(String username, String password);
 
+    boolean checkToken(String token);
+
     boolean logout();
 }
