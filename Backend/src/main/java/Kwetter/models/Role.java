@@ -1,4 +1,3 @@
 package Kwetter.models;
 
-public class Role
-{}
+public class Role {}

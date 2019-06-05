@@ -5,8 +5,8 @@ import Kwetter.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDTO
-{
+public class UserDTO {
+
     //fields
     private int userId;
     private String name;
@@ -20,101 +20,82 @@ public class UserDTO
     private List<FollowerDTO> following = new ArrayList<>();
 
     //getters
-    public int getUserId()
-    {
+    public int getUserId() {
         return userId;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public String getLocation()
-    {
+    public String getLocation() {
         return location;
     }
 
-    public String getWeb()
-    {
+    public String getWeb() {
         return web;
     }
 
-    public String getBio()
-    {
+    public String getBio() {
         return bio;
     }
 
-    public String getImage()
-    {
+    public String getImage() {
         return image;
     }
 
-    public List<FollowerDTO> getFollowers()
-    {
+    public List<FollowerDTO> getFollowers() {
         return followers;
     }
 
-    public List<FollowerDTO> getFollowings()
-    {
+    public List<FollowerDTO> getFollowings() {
         return following;
     }
 
     //setters
 
-    public void setUserId(int userId)
-    {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setLocation(String location)
-    {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setWeb(String web)
-    {
+    public void setWeb(String web) {
         this.web = web;
     }
 
-    public void setBio(String bio)
-    {
+    public void setBio(String bio) {
         this.bio = bio;
     }
 
-    public void setImage(String image)
-    {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public void setFollowers(List<FollowerDTO> followers)
-    {
+    public void setFollowers(List<FollowerDTO> followers) {
         this.followers = followers;
     }
 
-    public void setFollowings(List<FollowerDTO> following)
-    {
+    public void setFollowings(List<FollowerDTO> following) {
         this.following = following;
     }
 
     //constructors
-    public UserDTO(User userEntity)
-    {
+    public UserDTO(User userEntity) {
         this.userId = userEntity.getUserId();
         this.name = userEntity.getName();
         this.username = userEntity.getUsername();
@@ -122,12 +103,10 @@ public class UserDTO
         this.web = userEntity.getWeb();
         this.bio = userEntity.getBio();
         this.image = userEntity.getImage();
-        for (User user : userEntity.getFollowers())
-        {
+        for(User user : userEntity.getFollowers()) {
             followers.add(new FollowerDTO(user.getUserId(), user.getName()));
         }
-        for (User user : userEntity.getFollowing())
-        {
+        for(User user : userEntity.getFollowing()) {
             following.add(new FollowerDTO(user.getUserId(), user.getName()));
         }
     }

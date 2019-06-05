@@ -15,11 +15,12 @@ import javax.websocket.server.ServerEndpointConfig;
 /**
  * Sets a handshaking user's {@link HttpSession} in the {@link ServerEndpointConfig#getUserProperties()}
  * under {@link HttpSession}'s FQN
+ *
  * @author jgeenen
  */
-public class HttpSessionProvider extends ServerEndpointConfig.Configurator{
-    
-    public static HttpSession provide(EndpointConfig config){
+public class HttpSessionProvider extends ServerEndpointConfig.Configurator {
+
+    public static HttpSession provide(EndpointConfig config) {
         return (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
     }
 
@@ -27,5 +28,5 @@ public class HttpSessionProvider extends ServerEndpointConfig.Configurator{
     public void modifyHandshake(ServerEndpointConfig config, HandshakeRequest request, HandshakeResponse response) {
         config.getUserProperties().put(HttpSession.class.getName(), request.getHttpSession());
     }
-    
+
 }

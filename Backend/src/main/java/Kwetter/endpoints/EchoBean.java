@@ -27,22 +27,23 @@ public class EchoBean {
     private EchoBean delegate;
 
     @Asynchronous
-    public void send(Session session, Message message, int repeats, long delay, double delayMultiplier ){
+    public void send(Session session, Message message, int repeats, long delay, double delayMultiplier) {
         try {
-            synchronized(session){
+            synchronized(session) {
                 session.getBasicRemote().sendObject(message);
             }
             Thread.sleep(delay);
-        } catch (InterruptedException | IOException | EncodeException ex) {
+        }
+        catch(InterruptedException | IOException | EncodeException ex) {
             throw new IllegalStateException(ex);
         }
-        if(1<repeats){
+        if(1 < repeats) {
             delegate.send(
-                session, 
-                new Message("." + message.getText()), 
-                repeats-1, 
-                Math.round(delay*delayMultiplier), 
-                delayMultiplier
+                    session,
+                    new Message("." + message.getText()),
+                    repeats - 1,
+                    Math.round(delay * delayMultiplier),
+                    delayMultiplier
             );
         }
 

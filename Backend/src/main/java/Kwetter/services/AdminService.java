@@ -1,4 +1,3 @@
 package Kwetter.services;
 
-public class AdminService
-{}
+public class AdminService {}

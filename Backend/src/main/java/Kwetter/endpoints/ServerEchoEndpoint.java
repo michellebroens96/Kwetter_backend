@@ -21,67 +21,69 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 /**
- *
  * @author jgeenen
  */
 @ServerEndpoint(
-    value = "/echo-socket",
-    encoders = JsonEncoder.class, 
-    decoders = JsonDecoder.class,
-    configurator = HttpSessionProvider.class
+        value = "/echo-socket",
+        encoders = JsonEncoder.class,
+        decoders = JsonDecoder.class,
+        configurator = HttpSessionProvider.class
 )
 public class ServerEchoEndpoint {
-    
+
     private static final Logger LOG = Logger.getLogger(ServerEchoEndpoint.class.getName());
-    
+
     /**
      * stock glassfish 4.0 doesn't support dependency injection in Endpoints, which is a bug.
      * Hence the EJB lookup.
      */
     private static final EchoBean ECHO_BEAN;
+
     static {
         final String name = "java:global/jsr356-demo/EchoBean";
         try {
             ECHO_BEAN = (EchoBean) InitialContext.doLookup(name);
-        } catch (NamingException ex) {
+        }
+        catch(NamingException ex) {
             throw new IllegalStateException(ex);
         }
-        
+
     }
-    
+
     private HttpSession httpSession;
-    
+
     private Session session;
-    
+
     @OnOpen
-    public void onOpen(EndpointConfig endpointConfig, Session session){
+    public void onOpen(EndpointConfig endpointConfig, Session session) {
         this.httpSession = HttpSessionProvider.provide(endpointConfig);
         this.session = session;
         LOG.log(Level.INFO, "onOpen: endpointConfig: {0}, session: {1}", new Object[]{endpointConfig, session});
     }
-    
+
     @OnMessage
-    public void onMessage(Session session, Message message){
+    public void onMessage(Session session, Message message) {
         LOG.log(Level.INFO, "received message with text: {0}", message.getText());
         ECHO_BEAN.send(session, message, 5, 1000, 1.2);
     }
-    
+
     @OnClose
-    public void onClose(Session session, CloseReason closeReason){
+    public void onClose(Session session, CloseReason closeReason) {
         LOG.log(Level.INFO, "session {0} closed with reason {1}", new Object[]{session, closeReason});
-        try{
+        try {
             httpSession.invalidate();
-        } catch(IllegalStateException ise){
+        }
+        catch(IllegalStateException ise) {
             //swallow: httpSession allready expired
         }
     }
-    
+
     @OnError
-    public void onError(Session session, Throwable throwable){
+    public void onError(Session session, Throwable throwable) {
         LOG.log(
-            Level.WARNING, 
-            new StringBuilder("an error occured for session ").append(session).toString(), 
-            throwable
+                Level.WARNING,
+                new StringBuilder("an error occured for session ").append(session).toString(),
+                throwable
         );
     }
 
@@ -92,5 +94,5 @@ public class ServerEchoEndpoint {
     public HttpSession getHttpSession() {
         return httpSession;
     }
-    
+
 }

@@ -7,16 +7,18 @@
 package Kwetter.endpoints;
 
 import com.google.gson.Gson;
+
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 
 /**
  * Encodes {@link Message}s to JSON
+ *
  * @author jgeenen
  */
 public class JsonEncoder implements Encoder.Text<Message> {
-    
+
     private final Gson gson = new Gson();
 
     @Override

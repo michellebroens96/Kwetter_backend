@@ -12,28 +12,24 @@ import javax.inject.Named;
 @RequestScoped
 @Named("UserService")
 @Default
-public class UserService
-{
+public class UserService {
+
     @Inject
     private IUserDAO userDAO;
 
-    public User getUserById(int userId)
-    {
+    public User getUserById(int userId) {
         return userDAO.getUserById(userId);
     }
 
-    UserDTO getUserDTOById(int userId)
-    {
+    UserDTO getUserDTOById(int userId) {
         return userDAO.getUserDTOById(userId);
     }
 
-    public void follow(int followingId, int followerId)
-    {
+    public void follow(int followingId, int followerId) {
         userDAO.follow(followingId, followerId);
     }
 
-    public UserDTO editUser(int userId, UserDTO userJson)
-    {
+    public UserDTO editUser(int userId, UserDTO userJson) {
         return userDAO.editUser(userId, userJson);
     }
 }
