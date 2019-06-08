@@ -1,10 +1,12 @@
-package Kwetter.DTO;
+package Kwetter.dto;
 
-import Kwetter.models.User;
+import Kwetter.model.User;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class UserDTO {
 
     //fields
@@ -19,95 +21,20 @@ public class UserDTO {
     private List<FollowerDTO> followers = new ArrayList<>();
     private List<FollowerDTO> following = new ArrayList<>();
 
-    //getters
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getWeb() {
-        return web;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public List<FollowerDTO> getFollowers() {
-        return followers;
-    }
-
-    public List<FollowerDTO> getFollowings() {
-        return following;
-    }
-
-    //setters
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setWeb(String web) {
-        this.web = web;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public void setFollowers(List<FollowerDTO> followers) {
-        this.followers = followers;
-    }
-
-    public void setFollowings(List<FollowerDTO> following) {
-        this.following = following;
-    }
-
     //constructors
-    public UserDTO(User userEntity) {
-        this.userId = userEntity.getUserId();
-        this.name = userEntity.getName();
-        this.username = userEntity.getUsername();
-        this.location = userEntity.getLocation();
-        this.web = userEntity.getWeb();
-        this.bio = userEntity.getBio();
-        this.image = userEntity.getImage();
-        for(User user : userEntity.getFollowers()) {
-            followers.add(new FollowerDTO(user.getUserId(), user.getName()));
+    public UserDTO(User user) {
+        this.userId = user.getUserId();
+        this.name = user.getName();
+        this.username = user.getUsername();
+        this.location = user.getLocation();
+        this.web = user.getWeb();
+        this.bio = user.getBio();
+        this.image = user.getImage();
+        for(User u : user.getFollowers()) {
+            followers.add(new FollowerDTO(u.getUserId(), u.getName()));
         }
-        for(User user : userEntity.getFollowing()) {
-            following.add(new FollowerDTO(user.getUserId(), user.getName()));
+        for(User u : user.getFollowing()) {
+            following.add(new FollowerDTO(u.getUserId(), u.getName()));
         }
     }
 }
