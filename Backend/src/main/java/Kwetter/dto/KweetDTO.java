@@ -4,8 +4,8 @@ import Kwetter.model.Kweet;
 
 import java.util.Date;
 
-public class KweetDTO
-{
+public class KweetDTO {
+
     //fields
     private int kweetId;
     private int userId;
@@ -14,60 +14,49 @@ public class KweetDTO
     private Date date;
 
     //getters
-    public int getKweetId()
-    {
+    public int getKweetId() {
         return kweetId;
     }
 
-    public int getUserId()
-    {
+    public int getUserId() {
         return userId;
     }
 
-    public String getCreatorName()
-    {
+    public String getCreatorName() {
         return creatorName;
     }
 
-    public String getContent()
-    {
+    public String getContent() {
         return content;
     }
 
-    public Date getDate()
-    {
+    public Date getDate() {
         return date;
     }
 
     //setters
-    public void setKweetId(int kweetId)
-    {
+    public void setKweetId(int kweetId) {
         this.kweetId = kweetId;
     }
 
-    public void setUserId(int userId)
-    {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public void setCreatorName(String creatorName)
-    {
+    public void setCreatorName(String creatorName) {
         this.creatorName = creatorName;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public void setDate(Date date)
-    {
+    public void setDate(Date date) {
         this.date = date;
     }
 
     //constructors
-    public KweetDTO(Kweet kweet)
-    {
+    public KweetDTO(Kweet kweet) {
         this.kweetId = kweet.getKweetId();
         this.userId = kweet.getUser().getUserId();
         this.creatorName = kweet.getUser().getName();

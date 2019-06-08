@@ -1,36 +1,23 @@
-package Kwetter.model;
+package Kwetter.DTO;
 
-import javax.persistence.*;
+import Kwetter.models.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class User {
+public class UserDTO {
 
     //fields
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
     private String name;
-    @Column(unique = true)
     private String username;
-    private String password;
     private String location;
     private String web;
     private String bio;
     private String image;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "followers", joinColumns = {@JoinColumn(name = "followedId")},
-               inverseJoinColumns = {@JoinColumn(name = "followerId")})
-    @ElementCollection(targetClass = User.class)
-    private List<User> followers = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "followers", joinColumns = {@JoinColumn(name = "followerId")},
-               inverseJoinColumns = {@JoinColumn(name = "followedId")})
-    @ElementCollection(targetClass = User.class)
-    private List<User> following = new ArrayList<>();
+    private List<FollowerDTO> followers = new ArrayList<>();
+    private List<FollowerDTO> following = new ArrayList<>();
 
     //getters
     public int getUserId() {
@@ -43,10 +30,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getLocation() {
@@ -65,15 +48,16 @@ public class User {
         return image;
     }
 
-    public List<User> getFollowers() {
+    public List<FollowerDTO> getFollowers() {
         return followers;
     }
 
-    public List<User> getFollowing() {
+    public List<FollowerDTO> getFollowings() {
         return following;
     }
 
     //setters
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -84,10 +68,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setLocation(String location) {
@@ -106,23 +86,28 @@ public class User {
         this.image = image;
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(List<FollowerDTO> followers) {
         this.followers = followers;
     }
 
-    public void setFollowing(List<User> following) {
+    public void setFollowings(List<FollowerDTO> following) {
         this.following = following;
     }
 
-    //constructor
-
-
-    public User() {
+    //constructors
+    public UserDTO(User userEntity) {
+        this.userId = userEntity.getUserId();
+        this.name = userEntity.getName();
+        this.username = userEntity.getUsername();
+        this.location = userEntity.getLocation();
+        this.web = userEntity.getWeb();
+        this.bio = userEntity.getBio();
+        this.image = userEntity.getImage();
+        for(User user : userEntity.getFollowers()) {
+            followers.add(new FollowerDTO(user.getUserId(), user.getName()));
+        }
+        for(User user : userEntity.getFollowing()) {
+            following.add(new FollowerDTO(user.getUserId(), user.getName()));
+        }
     }
-
-    //methods
-    public void AddFollower(User follower) {
-        followers.add(follower);
-    }
-
 }

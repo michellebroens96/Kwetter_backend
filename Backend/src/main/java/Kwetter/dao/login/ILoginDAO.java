@@ -4,8 +4,8 @@ import Kwetter.dto.UserDTO;
 import Kwetter.model.Token;
 import Kwetter.model.User;
 
-public interface ILoginDAO
-{
+public interface ILoginDAO {
+
     User register(String username, String password);
 
     User checkUsername(String username);

@@ -3,11 +3,11 @@ package Kwetter.utility;
 import org.hibernate.Session;
 import org.hibernate.StatelessSession;
 
-public interface ISessionFactory
-{
-  Session getCurrentSession();
+public interface ISessionFactory {
 
-  Session openSession();
+    Session getCurrentSession();
 
-  StatelessSession openStatelessSession();
+    Session openSession();
+
+    StatelessSession openStatelessSession();
 }

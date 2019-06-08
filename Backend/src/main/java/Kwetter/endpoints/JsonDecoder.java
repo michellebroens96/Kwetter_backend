@@ -7,23 +7,25 @@
 package Kwetter.endpoints;
 
 import com.google.gson.Gson;
+
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
 /**
  * Decodes {@link Message}s from JSON
+ *
  * @author jgeenen
  */
-public class JsonDecoder implements Decoder.Text<Message>{
+public class JsonDecoder implements Decoder.Text<Message> {
 
     private final Gson gson = new Gson();
-    
+
     @Override
     public void init(EndpointConfig config) {
 
     }
-    
+
     @Override
     public Message decode(String arg0) throws DecodeException {
         return gson.fromJson(arg0, Message.class);
@@ -39,5 +41,5 @@ public class JsonDecoder implements Decoder.Text<Message>{
     public void destroy() {
 
     }
-    
+
 }

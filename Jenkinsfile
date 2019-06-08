@@ -22,6 +22,23 @@ pipeline {
             }
         }
 
+	stage('Sonar analysis') {
+	    agent any
+	    steps{
+		withSonarQubeEnv('SonarQube') {
+      			sh 'mvn -f ./Backend/pom.xml clean package sonar:sonar'
+    		} 
+	    }
+	}
+
+	stage('Quality gate') {
+	    steps {
+		    timeout(time: 5, unit: 'MINUTES') {
+    		    waitForQualityGate abortPipeline: true
+	        }
+	    }
+	}
+
         stage('Package') {
             steps {
                 sh 'mvn -f ./Backend/pom.xml -B -DskipTests package'

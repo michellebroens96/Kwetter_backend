@@ -10,33 +10,32 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 @RequestScoped
-public class HibernateSessionFactory implements ISessionFactory
-{
+public class HibernateSessionFactory implements ISessionFactory {
 
-  @Inject
-  private SessionFactory sessionFactory;
+    @Inject
+    private SessionFactory sessionFactory;
 
-  private Session currentSession;
+    private Session currentSession;
 
-  public Session openSession(){
-    return sessionFactory.openSession();
-  }
-
-  public Session getCurrentSession(){
-    if(currentSession == null){
-      currentSession = sessionFactory.openSession();
+    public Session openSession() {
+        return sessionFactory.openSession();
     }
-    return currentSession;
-  }
 
-  public StatelessSession openStatelessSession() {
-    return sessionFactory.openStatelessSession();
-  }
-
-  @PreDestroy
-  private void closeSession(){
-    if(currentSession!=null && currentSession.isOpen()) {
-      currentSession.close();
+    public Session getCurrentSession() {
+        if(currentSession == null) {
+            currentSession = sessionFactory.openSession();
+        }
+        return currentSession;
     }
-  }
+
+    public StatelessSession openStatelessSession() {
+        return sessionFactory.openStatelessSession();
+    }
+
+    @PreDestroy
+    private void closeSession() {
+        if(currentSession != null && currentSession.isOpen()) {
+            currentSession.close();
+        }
+    }
 }

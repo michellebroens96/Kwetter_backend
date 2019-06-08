@@ -6,8 +6,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 @Entity
-public class Kweet
-{
+public class Kweet {
+
     //fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,50 +19,41 @@ public class Kweet
     private Date date;
 
     //getters
-    public int getKweetId()
-    {
+    public int getKweetId() {
         return kweetId;
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public String getContent()
-    {
+    public String getContent() {
         return content;
     }
 
-    public Date getDate()
-    {
+    public Date getDate() {
         return date;
     }
 
     //setters
-    public void setKweetId(int kweetId)
-    {
+    public void setKweetId(int kweetId) {
         this.kweetId = kweetId;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public void setDate(Date date)
-    {
+    public void setDate(Date date) {
         this.date = date;
     }
 
     //constructor
-    public Kweet()
-    {
+    public Kweet() {
 
     }
 }

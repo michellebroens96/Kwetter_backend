@@ -9,27 +9,23 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
 
 @Singleton
-public class HibernateUtility
-{
+public class HibernateUtility {
 
-  private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-  @PostConstruct
-  private void buildSessionFactory()
-  {
-    sessionFactory = new Configuration().configure().buildSessionFactory();
-  }
+    @PostConstruct
+    private void buildSessionFactory() {
+        sessionFactory = new Configuration().configure().buildSessionFactory();
+    }
 
-  @Produces
-  public SessionFactory getSessionFactory()
-  {
-    return sessionFactory;
-  }
+    @Produces
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
-  @PreDestroy
-  public void closeSessionFactory()
-  {
-    sessionFactory.close();
-  }
+    @PreDestroy
+    public void closeSessionFactory() {
+        sessionFactory.close();
+    }
 
 }
