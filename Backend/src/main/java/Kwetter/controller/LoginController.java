@@ -1,8 +1,8 @@
 package Kwetter.controller;
 
-import Kwetter.dto.UserDTO;
 import Kwetter.model.User;
 import Kwetter.service.LoginService;
+import Kwetter.utility.LoginContainer;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -16,6 +16,7 @@ public class LoginController {
 
     @Inject
     private LoginService loginService;
+    @Inject LoginContainer loginContainer;
     private Gson gson = new Gson();
 
     @POST
@@ -38,11 +39,13 @@ public class LoginController {
     @Produces(APPLICATION_JSON)
     public Response Login(String userJson) {
         User attemptUser = gson.fromJson(userJson, User.class);
-        UserDTO user;
         String json = "";
-        user = new UserDTO(loginService.login(attemptUser.getUsername(), attemptUser.getPassword()));
-        if(user != null) {
-            json = gson.toJson(user);
+        try {
+            json = gson.toJson(loginContainer.getUser(attemptUser.getUsername(),
+                                                      attemptUser.getPassword()));
+        }
+        catch(Exception e) {
+            e.printStackTrace();
         }
         return Response.ok(json).build();
     }

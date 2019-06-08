@@ -1,6 +1,7 @@
 package Kwetter.dao.user;
 
 import Kwetter.dto.UserDTO;
+import Kwetter.model.Token;
 import Kwetter.model.User;
 import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
@@ -11,31 +12,30 @@ import javax.inject.Inject;
 
 @SessionScoped
 @Default
-public class UserDAO implements IUserDAO
-{
+public class UserDAO implements IUserDAO {
+
     @Inject
     private HibernateSessionFactory sessionFactory;
 
     @Override
-    public User getUserById(int userId)
-    {
+    public User getUserById(int userId) {
         Session session = sessionFactory.getCurrentSession();
+
         User user = session.get(User.class, userId);
         return user;
     }
 
     @Override
-    public UserDTO getUserDTOById(int userId)
-    {
+    public UserDTO getUserDTOById(int userId) {
         Session session = sessionFactory.getCurrentSession();
+
         User user = session.get(User.class, userId);
 
         return new UserDTO(user);
     }
 
     @Override
-    public void follow(int followingId, int followerId)
-    {
+    public void follow(int followingId, int followerId) {
         User user1;
         User user2;
         user1 = getUserById(followingId);
@@ -49,8 +49,7 @@ public class UserDAO implements IUserDAO
     }
 
     @Override
-    public UserDTO editUser(int userId, UserDTO userJson)
-    {
+    public UserDTO editUser(int userId, UserDTO userJson) {
         User user = getUserById(userId);
         user.setName(userJson.getName());
         user.setImage(userJson.getImage());
@@ -63,6 +62,28 @@ public class UserDAO implements IUserDAO
         session.getTransaction().begin();
         session.merge(user);
         session.getTransaction().commit();
+
         return new UserDTO(user);
+    }
+
+    @Override
+    public boolean checkToken(String givenToken) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Token token = (Token) session.createQuery("from Token where givenToken = :givenToken ")
+                                           .setParameter("token", givenToken).getSingleResult();
+        if(token != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getRoleId(int userId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        User user = session.get(User.class, userId);
+
+        return user.getRole().ordinal();
     }
 }

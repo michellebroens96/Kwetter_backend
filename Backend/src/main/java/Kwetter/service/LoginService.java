@@ -1,6 +1,7 @@
 package Kwetter.service;
 
 import Kwetter.dao.login.ILoginDAO;
+import Kwetter.dto.UserDTO;
 import Kwetter.model.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -24,7 +25,7 @@ public class LoginService {
         return loginDAO.checkUsername(username);
     }
 
-    public User login(String username, String password) {
+    public UserDTO login(String username, String password) {
         return loginDAO.login(username, password);
     }
 

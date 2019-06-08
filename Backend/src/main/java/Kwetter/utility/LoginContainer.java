@@ -27,7 +27,7 @@ public class LoginContainer {
 
     public UserDTO getUser(String username, String password) throws Exception {
 
-        // 1. the definition of the credentials
+        //Define credentials
         final CallbackHandler callbackHandler = callbacks->{
             for(final Callback callback : callbacks) {
                 if(callback instanceof NameCallback) {
@@ -44,11 +44,10 @@ public class LoginContainer {
             }
         };
 
-        // 2. the configuration
-        final Configuration config = new Configuration() {
+        //Set up configuration
+        final Configuration configuration = new Configuration() {
             @Override
             public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
-
                 return new AppConfigurationEntry[]{
                         new AppConfigurationEntry(
                                 "Utility.LoginChecker",
@@ -87,6 +86,5 @@ public class LoginContainer {
             return userDTO;
         }
         return null;
-
     }
 }

@@ -17,6 +17,7 @@ public class UserDTO {
     private String web;
     private String bio;
     private String image;
+    private String token;
 
     private List<FollowerDTO> followers = new ArrayList<>();
     private List<FollowerDTO> following = new ArrayList<>();
@@ -36,5 +37,6 @@ public class UserDTO {
         for(User u : user.getFollowing()) {
             following.add(new FollowerDTO(u.getUserId(), u.getName()));
         }
+        this.token = user.getToken();
     }
 }

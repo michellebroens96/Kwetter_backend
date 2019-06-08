@@ -12,4 +12,8 @@ public interface IUserDAO
     void follow(int followingId, int followerId);
 
     UserDTO editUser(int userId, UserDTO userJson);
+
+    boolean checkToken(String token);
+
+    int getRoleId(int userId);
 }
