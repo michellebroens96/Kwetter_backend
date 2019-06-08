@@ -16,7 +16,9 @@ public class LoginController {
 
     @Inject
     private LoginService loginService;
+
     @Inject LoginContainer loginContainer;
+
     private Gson gson = new Gson();
 
     @POST
