@@ -13,9 +13,9 @@
     <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
     <property name="hbm2ddl.auto">create</property>
 
-    <mapping class="Kwetter.models.User"></mapping>
-    <mapping class="Kwetter.models.Role"></mapping>
-    <mapping class="Kwetter.models.Kweet"></mapping>
+    <mapping class="Kwetter.model.User"></mapping>
+    <mapping class="Kwetter.model.Role"></mapping>
+    <mapping class="Kwetter.model.Kweet"></mapping>
     <!-- DB schema will be updated if needed -->
   </session-factory>
 </hibernate-configuration>

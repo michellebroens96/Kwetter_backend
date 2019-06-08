@@ -1,7 +1,7 @@
 package Kwetter.beans;
 
-import Kwetter.DAO.login.ILoginDAO;
-import Kwetter.models.User;
+import Kwetter.dao.login.ILoginDAO;
+import Kwetter.model.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
