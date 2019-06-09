@@ -24,6 +24,7 @@ public class LoginContainer {
 
     @Inject
     private LoginDAO loginDAO;
+    private UserDTO userDTO;
 
     public UserDTO getUser(String username, String password) throws Exception {
 
@@ -77,19 +78,12 @@ public class LoginContainer {
         this.userSubject = loginContext.getSubject();
 
         for(final Principal principal : userSubject.getPrincipals()) {
-            UserDTO userDTO = (UserDTO) principal;
+            userDTO = (UserDTO) principal;
             String token =
                     Jwts.builder().setSubject(Integer.toString(userDTO.getUserId())).signWith(SignatureAlgorithm.HS256,
                                                                                               Constant.key).compact();
             userDTO.setToken(loginDAO.saveToken(userDTO.getUserId(), token).getToken());
-
-            if(userDTO != null) {
-                return userDTO;
-            }
-            else {
-                return null;
-            }
         }
-        return null;
+        return userDTO;
     }
 }
