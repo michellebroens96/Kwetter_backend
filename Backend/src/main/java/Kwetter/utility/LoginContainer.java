@@ -83,7 +83,12 @@ public class LoginContainer {
                                                                                               Constant.key).compact();
             userDTO.setToken(loginDAO.saveToken(userDTO.getUserId(), token).getToken());
 
-            return userDTO;
+            if(userDTO != null) {
+                return userDTO;
+            }
+            else {
+                return null;
+            }
         }
         return null;
     }
