@@ -34,8 +34,11 @@ public class EchoBean {
             }
             Thread.sleep(delay);
         }
-        catch(InterruptedException | IOException | EncodeException ex) {
-            throw new IllegalStateException(ex);
+        catch(IOException | EncodeException e) {
+            throw new IllegalStateException(e);
+        }
+        catch(InterruptedException e) {
+            throw  new IllegalStateException(e);
         }
         if(1 < repeats) {
             delegate.send(
