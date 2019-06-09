@@ -13,7 +13,7 @@
             src/main/java/Kwetter/**
         </sonar.coverage.exclusions>
         <sonar.exclusions>
-            src/main/java/Kwetter/utility/LoginContainer
+            src/main/java/Kwetter/utility/LoginContainer.java
         </sonar.exclusions>
     </properties>
     <dependencies>
