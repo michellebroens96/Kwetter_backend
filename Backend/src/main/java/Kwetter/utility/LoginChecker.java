@@ -64,7 +64,7 @@ public class LoginChecker implements LoginModule {
             return false;
         }
         else {
-            subject.getPrincipals().add((Principal) user);
+            subject.getPrincipals().add(user);
             return true;
         }
     }

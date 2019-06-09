@@ -50,7 +50,7 @@ public class LoginContainer {
             public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
                 return new AppConfigurationEntry[]{
                         new AppConfigurationEntry(
-                                "Utility.LoginChecker",
+                                "utility.LoginChecker",
                                 AppConfigurationEntry.LoginModuleControlFlag.REQUIRED,
                                 new HashMap<String, Object>() {
                                     {
