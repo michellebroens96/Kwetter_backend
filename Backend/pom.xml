@@ -12,6 +12,9 @@
         <sonar.coverage.exclusions>
             src/main/java/Kwetter/**
         </sonar.coverage.exclusions>
+        <sonar.exclusions>
+            src/main/java/Kwetter/utility/LoginContainer
+        </sonar.exclusions>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
