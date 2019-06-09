@@ -9,6 +9,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/login")
@@ -47,7 +50,7 @@ public class LoginController {
                                                       attemptUser.getPassword()));
         }
         catch(Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, e.getMessage());
         }
         return Response.ok(json).build();
     }

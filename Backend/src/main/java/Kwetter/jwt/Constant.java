@@ -6,5 +6,5 @@ import java.security.Key;
 
 public class Constant {
 
-    public static Key key = MacProvider.generateKey();
+    public static final Key key = MacProvider.generateKey();
 }

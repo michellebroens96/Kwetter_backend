@@ -44,10 +44,11 @@ public class LoginContainer {
             }
         };
 
-        //Set up configuration
-        final Configuration configuration = new Configuration() {
+        //Congiguration set up
+        final Configuration config = new Configuration() {
             @Override
             public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
+
                 return new AppConfigurationEntry[]{
                         new AppConfigurationEntry(
                                 "utility.LoginChecker",
@@ -65,7 +66,6 @@ public class LoginContainer {
         // and loads the configuration from the file
         System.setProperty("java.security.auth.login.config",
                            Thread.currentThread().getContextClassLoader().getResource("jaas.config").toExternalForm());
-
         // 3. the API usage
         final LoginContext loginContext = new LoginContext("login", new Subject(), callbackHandler);
 
