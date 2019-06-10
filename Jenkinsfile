@@ -9,7 +9,12 @@ pipeline {
 	
     stages {
 		stage('Setting environment') {
-			PATH = "$PATH=/usr/bin/docker-compose"
+			steps {
+				environment {
+					PATH = "$PATH=/usr/bin/docker-compose"
+				}
+			}
+			
 		}
 		
         stage('Cleanup'){
