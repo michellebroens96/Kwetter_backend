@@ -59,9 +59,5 @@ pipeline {
                 }
             }
         }
-		
-		stage('Docker compose') {
-			step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'backend-service'], useCustomDockerComposeFile: true])
-		}
     }
 }
