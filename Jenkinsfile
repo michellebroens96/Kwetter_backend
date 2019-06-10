@@ -6,6 +6,10 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
+	
+	environment {
+		PATH = "$PATH/usr/bin/docker-compose"
+	}
 
     stages {
         stage('Cleanup'){
@@ -39,40 +43,33 @@ pipeline {
 	    }
 	}
 
-        stage('Package') {
-            steps {
-                sh 'mvn -f ./Backend/pom.xml -B -DskipTests package'
-            }
+    stage('Package') {
+        steps {
+            sh 'mvn -f ./Backend/pom.xml -B -DskipTests package'
         }
+    }
 
-        stage('Docker Build') {
-            steps {
-                sh 'docker build . -t michellebroens/kwetter_backend:production'
+    stage('Docker Build') {
+        steps {
+            sh 'docker build . -t michellebroens/kwetter_backend:production'
+        }
+    }
+	
+    stage('Docker publish') {
+        steps {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+            sh 'docker login -u $USERNAME -p $PASSWORD'
+            sh 'docker push michellebroens/kwetter_backend:production'
+            sh 'docker logout'
             }
         }
-        stage('Docker publish') {
-            steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                  sh 'docker login -u $USERNAME -p $PASSWORD'
-                  sh 'docker push michellebroens/kwetter_backend:production'
-                  sh 'docker logout'
-                }
-            }
-        }
-
-		stage('Setting environment'){
-			steps {
-				environment{
-					PATH = "$PATH:/usr/bin/docker-compose"
-				}
-			}	
-		}
+    }
 		
-		stage('Docker compose') {
-			steps {
-				sh 'docker-compose --version'
-				sh 'docker-compose up -f docker-compose.yml run -rm compile'
-			}
-		}	
+	stage('Docker compose') {
+		steps {
+			sh 'docker-compose --version'
+			sh 'docker-compose up -f docker-compose.yml run -rm compile'
+		}
+	}	
     }
 }
