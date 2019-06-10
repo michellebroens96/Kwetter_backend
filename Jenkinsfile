@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	environment {
+		PATH = "$PATH/usr/bin/docker-compose"
+	}
     tools{
         jdk '8'
     }
@@ -8,15 +11,6 @@ pipeline {
     }
 	
     stages {
-		
-		stage('Set environment') {
-			steps {
-				environment {
-					PATH = "$PATH/usr/bin/docker-compose"
-				}
-			}
-		}
-	
         stage('Cleanup'){
             steps{
                 sh '''
