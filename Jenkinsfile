@@ -57,7 +57,6 @@ pipeline {
                   sh 'docker push michellebroens/kwetter_backend:production'
                   sh 'docker logout'
                 }
-
             }
         }
     }

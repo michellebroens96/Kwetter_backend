@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  backend-service:
+    build: ./Backend/target/Backend-1.0-SNAPSHOT.jar
+    ports:
+    - 5001:80
+ 
