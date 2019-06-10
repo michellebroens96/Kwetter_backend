@@ -61,9 +61,11 @@ pipeline {
         }
 
 		stage('Setting environment'){
-			environment{
-				PATH = "$PATH:/usr/bin/docker-compose"
-			}
+			steps {
+				environment{
+					PATH = "$PATH:/usr/bin/docker-compose"
+				}
+			}	
 		}
 		
 		stage('Docker compose') {
