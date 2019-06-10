@@ -59,9 +59,14 @@ pipeline {
                 }
             }
         }
+
+		environment{
+			PATH = "$PATH:/usr/bin/docker-compose"
+		}
 		
 		stage('Docker compose') {
 			steps {
+				sh 'docker-compose --version'
 				sh 'docker-compose up -f docker-compose.yml run -rm compile'
 			}
 		}	
