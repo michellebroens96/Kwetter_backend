@@ -1,8 +1,5 @@
 pipeline {
     agent any
-	environment {
-		PATH = "$PATH/usr/bin/docker-compose"
-	}
     tools{
         jdk '8'
     }
@@ -66,8 +63,9 @@ pipeline {
 		
 	stage('Docker compose') {
 		steps {
-			sh 'docker-compose --version'
-			sh 'docker-compose up -f docker-compose.yml run -rm compile'
+			sh "docker-compose --version"
+			sh "docker-compose build"
+			sh "docker-compose up -d"
 		}
 	}	
     }
