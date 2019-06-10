@@ -6,13 +6,14 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
+	environment {
+		PATH = "$PATH:/usr/bin/"
+	}
 	
     stages {
 		stage('Setting environment') {
 			steps {
-				withEnv(["PATH=$PATH:~/.usr/bin"]){
-                    echo "PATH is: $PATH"
-                }  
+				echo "PATH is: $PATH"
 			} 
 		}
 		
