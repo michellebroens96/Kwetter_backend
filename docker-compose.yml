@@ -1,4 +1,7 @@
 version: "3.7"
+
+image: michellebroens/kwetter-backend:test
+
 services:
   backend-service:
     build: ./Backend/target/Backend-1.0-SNAPSHOT.jar
