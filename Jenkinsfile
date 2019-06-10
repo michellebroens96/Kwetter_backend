@@ -7,7 +7,7 @@ pipeline {
         skipStagesAfterUnstable()
     }
 	environment {
-		PATH = "$PATH/usr/bin/docker-compose"
+		PATH = "$PATH:/usr/bin/docker-compose"
 	}
 	
     stages {
