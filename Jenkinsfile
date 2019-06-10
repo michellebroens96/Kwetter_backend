@@ -8,6 +8,10 @@ pipeline {
     }
 	
     stages {
+		stage('Setting environment') {
+			PATH = "$PATH=/usr/bin/docker-compose"
+		}
+		
         stage('Cleanup'){
             steps{
                 sh '''
