@@ -72,9 +72,9 @@ pipeline {
 		
 	stage('Docker compose') {
 		steps {
-			sh "docker-compose --version"
-			sh "docker-compose build"
-			sh "docker-compose up -d"
+			sh "/usr/bin/docker-compose --version"
+			sh "/usr/bin/docker-compose build"
+			sh "/usr/bin/docker-compose up -d"
 		}
 	}	
     }
