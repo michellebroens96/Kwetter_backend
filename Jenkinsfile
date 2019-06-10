@@ -7,7 +7,7 @@ pipeline {
         skipStagesAfterUnstable()
     }
 	environment {
-		PATH = "$PATH:/usr/bin/"
+		PATH = "$PATH:/usr/bin"
 	}
 	
     stages {
@@ -72,9 +72,9 @@ pipeline {
 		
 	stage('Docker compose') {
 		steps {
-			sh 'docker-compose --version'
-			sh 'docker-compose build'
-			sh 'docker-compose up -d'
+			sh 'sudo docker-compose --version'
+			sh 'sudo docker-compose build'
+			sh 'sudo docker-compose up -d'
 		}
 	}	
     }
