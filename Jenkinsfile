@@ -7,11 +7,16 @@ pipeline {
         skipStagesAfterUnstable()
     }
 	
-	environment {
-		PATH = "$PATH/usr/bin/docker-compose"
-	}
-
     stages {
+		
+		stage('Set environment') {
+			steps {
+				environment {
+					PATH = "$PATH/usr/bin/docker-compose"
+				}
+			}
+		}
+	
         stage('Cleanup'){
             steps{
                 sh '''
