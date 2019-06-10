@@ -7,13 +7,13 @@ pipeline {
         skipStagesAfterUnstable()
     }
 	environment {
-		PATH = "/usr/bin/docker-compose"
+		PATH = "/usr/bin/docker-compose$PATH"
 	}
 	
     stages {
 		stage('Setting environment') {
 			steps {
-				sh "echo ${PATH}"
+				echo "PATH is: $PATH"
 			} 
 		}
 		
