@@ -7,7 +7,7 @@ pipeline {
         skipStagesAfterUnstable()
     }
 	environment {
-		PATH = "$PATH:/usr/bin/"
+		PATH = "$PATH:/usr/local/bin/"
 	}
 	
     stages {
