@@ -65,17 +65,10 @@ pipeline {
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh 'docker login -u $USERNAME -p $PASSWORD'
             sh 'docker push michellebroens/kwetter_backend:production'
+			sh 'docker run michellebroens/kwetter_backend:production'
             sh 'docker logout'
             }
         }
-    }
-		
-	stage('Docker compose') {
-		steps {
-			sh 'sudo docker-compose --version'
-			sh 'sudo docker-compose build'
-			sh 'sudo docker-compose up -d'
-		}
-	}	
+    }	
     }
 }
