@@ -12,7 +12,9 @@ pipeline {
 	
     stages {
 		stage('Setting environment') {
-			sh "echo ${PATH}"
+			steps {
+				sh "echo ${PATH}"
+			} 
 		}
 		
         stage('Cleanup'){
