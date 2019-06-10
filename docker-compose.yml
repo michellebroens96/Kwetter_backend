@@ -1,6 +1,6 @@
 version: "3.7"
 
-image: michellebroens/kwetter-backend:test
+image: michellebroens/kwetter-backend:test  
 
 services:
   backend-service:
