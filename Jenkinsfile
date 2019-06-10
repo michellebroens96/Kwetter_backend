@@ -11,7 +11,7 @@ pipeline {
 		stage('Setting environment') {
 			steps {
 				withEnv(["PATH=$PATH:~/.usr/bin"]){
-                    sh "bash test.sh"
+                    echo "PATH is: $PATH"
                 }  
 			} 
 		}
