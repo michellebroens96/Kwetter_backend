@@ -47,7 +47,7 @@ pipeline {
 
     stage('Docker Build') {
         steps {
-            sh 'docker build . -t michellebroens/kwetter_backend:production'
+            sh 'sudo docker build . -t michellebroens/kwetter_backend:production'
         }
     }
 	
