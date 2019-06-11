@@ -69,7 +69,9 @@ pipeline {
 	}
 	
 	stage('Taurus') {
-		sh 'bzt taurus.yml --report'
+		steps {
+			sh 'bzt taurus.yml --report'
+		}	
 	}
     }
 }
