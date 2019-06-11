@@ -40,4 +40,8 @@ public class UserDTO implements Principal {
         }
         this.token = user.getToken();
     }
+
+    public UserDTO(){
+
+    }
 }
