@@ -1,10 +1,10 @@
 version: "2.3"
 
-services:
-  backend-service:
-    build:
-        context: .
-        dockerfile: michellebroens/kwetter_backend:production
-    ports:
-    - 5001:80
+spec:
+  - name: kwetter-backend
+        image: michellebroens/kwetter_backend:test
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+
  
