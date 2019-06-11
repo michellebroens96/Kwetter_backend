@@ -8,5 +8,5 @@ scenarios:
   simple:
     think-time: 0.75
     requests:
-    - http://localhost:5001/Backend-1.0-SNAPSHOT.war/rest/test
+    - http://michellebroens/kwetter_backend:production/rest/test
  
