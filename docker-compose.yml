@@ -4,7 +4,7 @@ services:
     web:
         build: .
         ports:
-        - "8081:8081"
+        - "5001:5001"
     redis:
         image: michellebroens/kwetter_backend:production
  
