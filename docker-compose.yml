@@ -2,7 +2,9 @@ version: "2.3"
 
 services:
   backend-service:
-    build: ./Backend/target/Backend-1.0-SNAPSHOT.jar
+    build:
+        context: .
+        dockerfile: michellebroens/kwetter_backend:production
     ports:
     - 5001:80
  
