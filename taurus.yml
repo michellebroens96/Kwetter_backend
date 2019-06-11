@@ -8,5 +8,8 @@ scenarios:
   simple:
     think-time: 0.75
     requests:
-    - http://localhost:5001/rest/test
+    - url: http://localhost:5001/rest/test
+      method: GET
+      headers:
+        Content-Type: application/json
  
