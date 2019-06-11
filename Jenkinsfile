@@ -67,5 +67,9 @@ pipeline {
 			sh 'docker-compose up -d'
 		}
 	}
+	
+	stage('Taurus') {
+		sh 'bzt taurus.yml --report'
+	}
     }
 }
