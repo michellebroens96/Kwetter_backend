@@ -6,17 +6,8 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
-	environment {
-		PATH = "$PATH:/usr/bin"
-	}
 	
     stages {
-		stage('Setting environment') {
-			steps {
-				echo "PATH is: $PATH"
-			} 
-		}
-		
         stage('Cleanup'){
             steps{
                 sh '''
@@ -65,10 +56,15 @@ pipeline {
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh 'docker login -u $USERNAME -p $PASSWORD'
             sh 'docker push michellebroens/kwetter_backend:production'
-			sh 'docker run michellebroens/kwetter_backend:production'
             sh 'docker logout'
             }
         }
-    }	
+    }
+	
+	stage('Docker compose') {
+		steps {
+			sh 'docker-compose up -d'
+		}
+	}
     }
 }
