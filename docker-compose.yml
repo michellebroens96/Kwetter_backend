@@ -1,10 +1,10 @@
 version: "2.3"
 
-spec:
-  - name: kwetter-backend
-        image: michellebroens/kwetter_backend:test
+services:
+    web:
+        build: .
         ports:
-        - containerPort: 8080
-        imagePullPolicy: Always
-
+        - containerPort: 8081
+    redis:
+        image: michellebroens/kwetter_backend:production
  
