@@ -44,12 +44,6 @@ pipeline {
             sh 'mvn -f ./Backend/pom.xml -B -DskipTests package'
         }
     }
-	
-	stage('Taurus') {
-		steps {
-			sh 'bzt taurus.yml -report'
-		}	
-	}
 
     stage('Docker Build') {
         steps {
@@ -72,6 +66,12 @@ pipeline {
 			sh 'docker-compose --version'
 			sh 'docker-compose up -d'
 		}
-	}	
+	}
+
+	stage('Taurus') {
+		steps {
+			sh 'bzt taurus.yml -report'
+		}	
+	}
     }
 }
