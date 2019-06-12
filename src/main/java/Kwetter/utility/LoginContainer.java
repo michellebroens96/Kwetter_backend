@@ -17,6 +17,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
 import java.security.Principal;
 import java.util.HashMap;
 
@@ -72,8 +73,18 @@ public class LoginContainer {
         // 3. the API usage
         final LoginContext loginContext = new LoginContext("login", new Subject(), callbackHandler);
 
-        // this will properly instantiate the login module and authenticate the user
-        loginContext.login();
+        try {
+            // this will properly instantiate the login module and authenticate the user
+            loginContext.login();
+        }
+        catch(LoginException le) {
+            System.err.println("Cannot create LoginContext. "
+                               + le.getMessage());
+        }
+        catch(SecurityException se) {
+            System.err.println("Cannot create LoginContext. "
+                               + se.getMessage());
+        }
 
         // at the end of the authentication, the subject should contain the principals
         final Subject subject = loginContext.getSubject();

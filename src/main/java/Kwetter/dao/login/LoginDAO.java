@@ -67,7 +67,7 @@ public class LoginDAO implements ILoginDAO {
         User user = session.get(User.class, userId);
         Token token = new Token(user, jwtToken, null);
         session.getTransaction().begin();
-        session.saveOrUpdate(token);
+            session.saveOrUpdate(token);
         session.getTransaction().commit();
 
         return token;

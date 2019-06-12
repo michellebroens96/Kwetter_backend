@@ -5,10 +5,12 @@ import org.hibernate.cfg.Configuration;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
-import javax.inject.Singleton;
 
-@Singleton
+@RequestScoped
+@Default
 public class HibernateUtility {
 
     private SessionFactory sessionFactory;
@@ -25,6 +27,8 @@ public class HibernateUtility {
 
     @PreDestroy
     public void closeSessionFactory() {
+
+        sessionFactory.notify();
         sessionFactory.close();
     }
 

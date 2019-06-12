@@ -16,6 +16,7 @@
     <mapping class="Kwetter.model.User"></mapping>
     <mapping class="Kwetter.model.Role"></mapping>
     <mapping class="Kwetter.model.Kweet"></mapping>
+    <mapping class="Kwetter.model.Token"></mapping>
     <!-- DB schema will be updated if needed -->
   </session-factory>
 </hibernate-configuration>
