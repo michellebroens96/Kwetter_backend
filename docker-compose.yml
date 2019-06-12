@@ -2,7 +2,6 @@ version: "2.3"
 
 services:
     web:
-        build: .
         image: "michellebroens/kwetter_backend:production"
         ports:
         - "5001:5001"
