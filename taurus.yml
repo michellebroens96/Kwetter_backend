@@ -9,7 +9,6 @@ scenarios:
     think-time: 0.75
     requests:
     - url: http://127.0.0.1:5001/rest/test
-      method: GET
       headers:
         Content-Type: application/json
  
