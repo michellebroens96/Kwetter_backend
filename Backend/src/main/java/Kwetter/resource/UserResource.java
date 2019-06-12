@@ -1,9 +1,10 @@
-package Kwetter.controller;
+package Kwetter.resource;
 
 import Kwetter.dto.UserDTO;
 import Kwetter.service.UserService;
 import com.google.gson.Gson;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -11,8 +12,9 @@ import javax.ws.rs.core.Response;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
+@RequestScoped
 @Path("/profilepage/{visitedId}")
-public class UserController {
+public class UserResource {
 
     @Inject
     private UserService userService;

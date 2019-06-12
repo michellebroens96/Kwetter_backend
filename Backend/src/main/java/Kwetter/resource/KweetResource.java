@@ -1,16 +1,18 @@
-package Kwetter.controller;
+package Kwetter.resource;
 
 import Kwetter.service.KweetService;
 import com.google.gson.Gson;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+@RequestScoped
 @Path("/kweet")
-public class KweetController {
+public class KweetResource {
 
     @Inject
     private KweetService kweetService;

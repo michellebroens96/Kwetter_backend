@@ -1,7 +1,8 @@
-package Kwetter.controller;
+package Kwetter.resource;
 
 import Kwetter.dto.UserDTO;
 
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -9,8 +10,9 @@ import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+@RequestScoped
 @Path("/test")
-public class TestController {
+public class TestResource {
 
     @GET
     @Produces(APPLICATION_JSON)

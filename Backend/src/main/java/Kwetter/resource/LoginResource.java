@@ -1,10 +1,11 @@
-package Kwetter.controller;
+package Kwetter.resource;
 
 import Kwetter.model.User;
 import Kwetter.service.LoginService;
 import Kwetter.utility.LoginContainer;
 import com.google.gson.Gson;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -14,8 +15,9 @@ import java.util.logging.Logger;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+@RequestScoped
 @Path("/login")
-public class LoginController {
+public class LoginResource {
 
     @Inject
     private LoginService loginService;
@@ -50,7 +52,7 @@ public class LoginController {
                                                       attemptUser.getPassword()));
         }
         catch(Exception e) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, e.getMessage());
+            Logger.getLogger(LoginResource.class.getName()).log(Level.SEVERE, e.getMessage());
         }
         return Response.ok(json).build();
     }

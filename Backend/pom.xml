@@ -8,26 +8,27 @@
     <artifactId>Backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <name>Backend</name>
     <properties>
-        <version.thorntail>2.4.0.Final</version.thorntail>
-        <sonar.coverage.exclusions>
-            src/main/java/Kwetter/**
-        </sonar.coverage.exclusions>
-        <sonar.exclusions>
-            src/main/java/Kwetter/utility/LoginContainer.java
-        </sonar.exclusions>
+        <!--<version.thorntail>2.4.0.Final</version.thorntail>-->
+        <!--<sonar.coverage.exclusions>-->
+            <!--src/main/java/Kwetter/**-->
+        <!--</sonar.coverage.exclusions>-->
+        <!--<sonar.exclusions>-->
+            <!--src/main/java/Kwetter/utility/LoginContainer.java-->
+        <!--</sonar.exclusions>-->
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.thorntail</groupId>
-                <artifactId>bom-all</artifactId>
-                <version>${version.thorntail}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <!--<dependencyManagement>-->
+        <!--<dependencies>-->
+            <!--<dependency>-->
+                <!--<groupId>io.thorntail</groupId>-->
+                <!--<artifactId>bom-all</artifactId>-->
+                <!--<version>${version.thorntail}</version>-->
+                <!--<scope>import</scope>-->
+                <!--<type>pom</type>-->
+            <!--</dependency>-->
+        <!--</dependencies>-->
+    <!--</dependencyManagement>-->
 
 
     <dependencies>
@@ -42,7 +43,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <version>8.0.11</version>
         </dependency>
 
         <dependency>
@@ -54,11 +55,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.faces/javax.faces-api -->
@@ -107,47 +103,47 @@
             <artifactId>jjwt-api</artifactId>
             <version>0.10.6</version>
         </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>jaxrs-multipart</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>jaxrs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>cdi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>datasources</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>ejb</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>io.thorntail</groupId>-->
+            <!--<artifactId>jpa</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.thorntail</groupId>-->
+            <!--<artifactId>jaxrs-multipart</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.thorntail</groupId>-->
+            <!--<artifactId>jaxrs</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.thorntail</groupId>-->
+            <!--<artifactId>cdi</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.thorntail</groupId>-->
+            <!--<artifactId>datasources</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.thorntail</groupId>-->
+            <!--<artifactId>ejb</artifactId>-->
+        <!--</dependency>-->
 
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>io.thorntail</groupId>
-                <artifactId>thorntail-maven-plugin</artifactId>
-                <version>${version.thorntail}</version>
-                <executions>
-                    <execution>
-                        <id>package</id>
-                        <goals>
-                            <goal>package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>io.thorntail</groupId>-->
+                <!--<artifactId>thorntail-maven-plugin</artifactId>-->
+                <!--<version>${version.thorntail}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>package</id>-->
+                        <!--<goals>-->
+                            <!--<goal>package</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

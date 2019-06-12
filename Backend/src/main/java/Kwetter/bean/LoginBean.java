@@ -1,4 +1,4 @@
-package Kwetter.beans;
+package Kwetter.bean;
 
 import Kwetter.dao.login.ILoginDAO;
 import Kwetter.dto.UserDTO;
