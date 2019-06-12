@@ -4,5 +4,5 @@ services:
     web:
         image: "michellebroens/kwetter_backend:production"
         ports:
-        - "5001:5001"
+        - "5001:8080"
  
