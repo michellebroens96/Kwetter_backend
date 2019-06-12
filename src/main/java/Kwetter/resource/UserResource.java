@@ -11,10 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
 @Path("/profilepage/{visitedId}")
 public class UserResource {
@@ -25,14 +23,14 @@ public class UserResource {
 
     @Path("{visitorId}")
     @POST
-    @Produces(TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response followUser(@PathParam("visitorId") int followedId, @PathParam("visitedId") int followerId) {
         userService.follow(followedId, followerId);
         return Response.ok().build();
     }
 
     @GET
-    @Produces(TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response GetUser(@PathParam("visitedId") int visitedId) {
         String userJson = gson.toJson(userService.getUserById(visitedId));
         return Response.ok(userJson).build();
@@ -40,8 +38,8 @@ public class UserResource {
 
     @Path("edit/{visitorId}")
     @POST
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response EditProfile(@PathParam("visitorId") int visitorId, @PathParam("visitedId") int visitedId,
                                 String profileInfoJson) {
         String json = "";
@@ -51,4 +49,19 @@ public class UserResource {
         }
         return Response.ok(json).build();
     }
+
+    @Path("/following")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllFollowing(@PathParam("visitedId") int visitedId) {
+        return Response.ok(userService.getFollowing(visitedId)).build();
+    }
+
+    @Path("/followers")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllFollowers(@PathParam("visitedId") int visitedId){
+        return Response.ok(userService.getFollowers(visitedId)).build();
+    }
+
 }

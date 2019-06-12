@@ -8,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 @RequestScoped
 @Named("UserService")
@@ -31,5 +32,17 @@ public class UserService {
 
     public UserDTO editUser(int userId, UserDTO userJson) {
         return userDAO.editUser(userId, userJson);
+    }
+
+    public int getRoleId(int userId) {
+        return userDAO.getRoleId(userId);
+    }
+
+    public List<UserDTO> getFollowing(int userId) {
+        return userDAO.getFollowing(userId);
+    }
+
+    public List<UserDTO> getFollowers(int userId) {
+        return userDAO.getFollowers(userId);
     }
 }
