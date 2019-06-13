@@ -1,4 +1,4 @@
-package Kwetter.Exception;
+package Kwetter.exception;
 
 public class UnauthorizedException extends RuntimeException {
 

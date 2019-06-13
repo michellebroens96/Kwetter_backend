@@ -1,6 +1,6 @@
 package Kwetter.filter;
 
-import Kwetter.Exception.UnauthorizedException;
+import Kwetter.exception.UnauthorizedException;
 import Kwetter.model.Role;
 import Kwetter.utility.Secured;
 
@@ -72,7 +72,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     private void checkPermissions(ContainerRequestContext requestContext, List<Role> allowedRoles) throws Exception {
         // Check if user contains allowed roles
-        // Throw an Exception if user doesn't have any of these
+        // Throw an exception if user doesn't have any of these
         final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
         boolean permitted = allowedRoles.isEmpty();
 

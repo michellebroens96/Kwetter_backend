@@ -34,13 +34,13 @@ public class User {
     private String token;
     private Role role = Role.USER;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name="followers",
                joinColumns={@JoinColumn(name="followerId",referencedColumnName = "userId")},
                inverseJoinColumns={@JoinColumn(name="followedId",referencedColumnName = "userId")})
     private List<User> following = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "following")
+    @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER)
     private List<User> followers;
 
     //methods
