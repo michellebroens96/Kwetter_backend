@@ -1,5 +1,6 @@
 package Kwetter.dao.user;
 
+import Kwetter.dto.FollowerDTO;
 import Kwetter.dto.UserDTO;
 import Kwetter.model.Token;
 import Kwetter.model.User;
@@ -91,15 +92,17 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public List<User> getFollowing(int userId) {
+    public List<FollowerDTO> getFollowing(int userId) {
         User user = getUserById(userId);
-        return user.getFollowing();
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO.getFollowing();
     }
 
     @Override
-    public List<User> getFollowers(int userId) {
+    public List<FollowerDTO> getFollowers(int userId) {
         User user = getUserById(userId);
-        return user.getFollowers();
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO.getFollowers();
     }
 
     @Override

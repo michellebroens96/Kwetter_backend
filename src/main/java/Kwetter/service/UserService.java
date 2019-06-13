@@ -1,6 +1,7 @@
 package Kwetter.service;
 
 import Kwetter.dao.user.IUserDAO;
+import Kwetter.dto.FollowerDTO;
 import Kwetter.dto.UserDTO;
 import Kwetter.model.User;
 
@@ -38,11 +39,11 @@ public class UserService {
         return userDAO.getRoleId(userId);
     }
 
-    public List<User> getFollowing(int userId) {
+    public List<FollowerDTO> getFollowing(int userId) {
         return userDAO.getFollowing(userId);
     }
 
-    public List<User> getFollowers(int userId) {
+    public List<FollowerDTO> getFollowers(int userId) {
         return userDAO.getFollowers(userId);
     }
 }
