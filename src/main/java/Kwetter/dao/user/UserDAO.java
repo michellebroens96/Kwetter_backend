@@ -4,15 +4,12 @@ import Kwetter.dto.UserDTO;
 import Kwetter.model.Token;
 import Kwetter.model.User;
 import Kwetter.utility.HibernateSessionFactory;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RequestScoped
 @Default
@@ -40,21 +37,18 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean follow(int followingId, int followerId) {
-        User userFollowing = getUserById(followingId);
-        User userFollower = getUserById(followerId);
-        userFollowing.addFollower(userFollower);
+        User userFollowing = new User();
+        User userFollower = new User();
+        userFollowing = getUserById(followingId);
+        userFollower = getUserById(followerId);
+        userFollower.addFollower(userFollowing);
 
-        try {
-            Session session = sessionFactory.getCurrentSession();
-            session.getTransaction().begin();
-            session.merge(userFollowing);
-            session.getTransaction().commit();
-            return true;
-        }
-        catch(HibernateException e){
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, e.getMessage());
-            return false;
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
+        session.merge(userFollower);
+        session.getTransaction().commit();
+
+        return true;
     }
 
     @Override

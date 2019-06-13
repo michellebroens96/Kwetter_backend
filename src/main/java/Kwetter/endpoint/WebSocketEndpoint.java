@@ -51,7 +51,6 @@ public class WebSocketEndpoint {
     @OnClose
     public void onClosed(Session session, @PathParam("userId") int userId) {
         sessionMap.remove(userId);
-        System.out.println("Somebody left, count is now " + sessionMap.size());
     }
 
     public void sendToAllFollowing(String message) {
@@ -63,12 +62,8 @@ public class WebSocketEndpoint {
             List<User> followers = user.getFollowing();
 
             followers.forEach(k->{
-                System.out.println("I GET INTO THE FOR LOOP");
-                System.out.println(k.getUserId());
-                System.out.println(sessionMap.size());
                 if(sessionMap.containsKey(k.getUserId())) {
                     try {
-                        System.out.println("I ALSO GET INTO THE IF STATEMENT BUT THE MESSAGE JUST DOESNT SEND LOL");
                         sessionMap.get(k.getUserId()).getAsyncRemote().sendText(mapper.writeValueAsString(t));
                     }
                     catch(JsonProcessingException e) {

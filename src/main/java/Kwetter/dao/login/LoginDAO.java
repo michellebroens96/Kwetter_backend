@@ -54,8 +54,7 @@ public class LoginDAO implements ILoginDAO {
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("username"), username),
-                                         criteriaBuilder.equal(root.get("password"), password));
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("username"), username));
         user = session.createQuery(criteriaQuery).uniqueResult();
 
         return new UserDTO(user);
