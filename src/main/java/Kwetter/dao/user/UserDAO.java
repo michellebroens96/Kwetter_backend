@@ -5,12 +5,10 @@ import Kwetter.model.Token;
 import Kwetter.model.User;
 import Kwetter.utility.HibernateSessionFactory;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped
@@ -39,23 +37,15 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean follow(int followingId, int followerId) {
-        User user1;
-        User user2;
-        user1 = getUserById(followingId);
-        user2 = getUserById(followerId);
-        user1.AddFollower(user2);
+        User user = getUserById(followingId);
+        User followThis =  getUserById(followerId);
+        user.setFollowing(getFollowing(user.getUserId()));
+        user.addFollower(followThis);
 
-        try {
-            Session session = sessionFactory.getCurrentSession();
-            session.getTransaction().begin();
-            session.merge(user1);
-            session.getTransaction().commit();
-            return true;
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return false;
-        }
+        UserDTO userDTO = new UserDTO(user);
+
+        editUser(user.getUserId(), userDTO);
+        return true;
     }
 
     @Override
@@ -98,24 +88,25 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public List<UserDTO> getFollowing(int userId) {
+    public List<User> getFollowing(int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query<UserDTO> query = session.createQuery("FROM User u " +
-                                          "JOIN u.following AS f " +
-                                          "WHERE u.userId = :userId", UserDTO.class)
-                                      .setParameter("userId", userId);
+        List<User> followingList = session.createQuery("from User u " +
+                                          "join u.following as f " +
+                                          "where u.userId = :userId", User.class)
+                                      .setParameter("userId", userId).getResultList();
 
-        return new ArrayList<>(query.getResultList());
+        return followingList;
     }
 
     @Override
-    public List<UserDTO> getFollowers(int userId) {
+    public List<User> getFollowers(int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query<UserDTO> query = session.createQuery("FROM User u " +
-                                                "JOIN u.following AS f " +
-                                                "WHERE f.userId = :userId", UserDTO.class)
-                                      .setParameter("userId", userId);
-        return new ArrayList<>(query.getResultList());
+        List<User> followerList = session.createQuery("from User u " +
+                                                      "join u.following as f " +
+                                                      "where f.userId = :userId", User.class)
+                                         .setParameter("userId", userId).getResultList();
+
+        return followerList;
     }
 
     @Override

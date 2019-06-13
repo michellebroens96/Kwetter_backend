@@ -1,5 +1,7 @@
 package Kwetter.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,7 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
+@Data
 public class Kweet {
 
     //fields
@@ -20,43 +23,4 @@ public class Kweet {
     private User user;
     private String content;
     private Date date;
-
-    //getters
-    public int getKweetId() {
-        return kweetId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    //setters
-    public void setKweetId(int kweetId) {
-        this.kweetId = kweetId;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    //constructor
-    public Kweet() {
-
-    }
 }

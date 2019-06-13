@@ -32,11 +32,8 @@ public class UserDTO implements Principal {
         this.web = user.getWeb();
         this.bio = user.getBio();
         this.image = user.getImage();
-        for(User u : user.getFollowers()) {
-            followers.add(new FollowerDTO(u.getUserId(), u.getName()));
-        }
         for(User u : user.getFollowing()) {
-            following.add(new FollowerDTO(u.getUserId(), u.getName()));
+            followers.add(new FollowerDTO(u.getUserId(), u.getName()));
         }
         this.token = user.getToken();
     }

@@ -19,9 +19,9 @@ public interface IUserDAO
 
     int getRoleId(int userId);
 
-    List<UserDTO> getFollowing(int userId);
+    List<User> getFollowing(int userId);
 
-    List<UserDTO> getFollowers(int userId);
+    List<User> getFollowers(int userId);
 
     boolean unfollowUser(int userId);
 }

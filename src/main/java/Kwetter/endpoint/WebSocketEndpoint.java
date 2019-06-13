@@ -60,7 +60,7 @@ public class WebSocketEndpoint {
             int placedBy = t.getUser().getUserId();
 
             User user = userDAO.getUserById(placedBy);
-            List<User> followers = user.getFollowers();
+            List<User> followers = user.getFollowing();
 
             followers.forEach(k->{
                 System.out.println("I GET INTO THE FOR LOOP");

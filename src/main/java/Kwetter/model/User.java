@@ -35,21 +35,11 @@ public class User {
     private String token;
     private Role role = Role.USER;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "followers", joinColumns = {@JoinColumn(name = "followedId")},
-               inverseJoinColumns = {@JoinColumn(name = "followerId")})
-    @ElementCollection(targetClass = User.class)
-    private List<User> followers = new ArrayList<>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "followers", joinColumns = {@JoinColumn(name = "followerId")},
-               inverseJoinColumns = {@JoinColumn(name = "followedId")})
-    @ElementCollection(targetClass = User.class)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<User> following = new ArrayList<>();
 
     //methods
-    public void AddFollower(User follower) {
-        followers.add(follower);
+    public void addFollower(User follower) {
+        following.add(follower);
     }
-
 }
