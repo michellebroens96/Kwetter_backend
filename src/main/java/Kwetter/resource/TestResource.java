@@ -9,7 +9,7 @@ public class TestResource {
 
     @GET
     public Response getTest() {
-        String test = "work pls";
+        String test = "Rest working :D";
         return Response.ok(test).build();
     }
 }

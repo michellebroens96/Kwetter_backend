@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
-@ServerEndpoint("/socker/{userId}")
+@ServerEndpoint("/socket/{userId}")
 public class WebSocketEndpoint {
 
     private final Map<Integer, Session> sessionMap = new ConcurrentHashMap<>();

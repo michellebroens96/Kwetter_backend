@@ -4,12 +4,15 @@ import Kwetter.dto.UserDTO;
 import Kwetter.model.Token;
 import Kwetter.model.User;
 import Kwetter.utility.HibernateSessionFactory;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RequestScoped
 @Default
@@ -37,15 +40,21 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean follow(int followingId, int followerId) {
-        User user = getUserById(followingId);
-        User followThis =  getUserById(followerId);
-        user.setFollowing(getFollowing(user.getUserId()));
-        user.addFollower(followThis);
+        User userFollowing = getUserById(followingId);
+        User userFollower = getUserById(followerId);
+        userFollowing.addFollower(userFollower);
 
-        UserDTO userDTO = new UserDTO(user);
-
-        editUser(user.getUserId(), userDTO);
-        return true;
+        try {
+            Session session = sessionFactory.getCurrentSession();
+            session.getTransaction().begin();
+            session.merge(userFollowing);
+            session.getTransaction().commit();
+            return true;
+        }
+        catch(HibernateException e){
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -89,28 +98,21 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public List<User> getFollowing(int userId) {
-        Session session = sessionFactory.getCurrentSession();
-        List<User> followingList = session.createQuery("from User u " +
-                                          "join u.following as f " +
-                                          "where u.userId = :userId", User.class)
-                                      .setParameter("userId", userId).getResultList();
-
-        return followingList;
+        User user = getUserById(userId);
+        return user.getFollowing();
     }
 
     @Override
     public List<User> getFollowers(int userId) {
-        Session session = sessionFactory.getCurrentSession();
-        List<User> followerList = session.createQuery("from User u " +
-                                                      "join u.following as f " +
-                                                      "where f.userId = :userId", User.class)
-                                         .setParameter("userId", userId).getResultList();
-
-        return followerList;
+        User user = getUserById(userId);
+        return user.getFollowers();
     }
 
     @Override
     public boolean unfollowUser(int userId) {
-        return false;
+        Session session = sessionFactory.getCurrentSession();
+        User user = getUserById(userId);
+        //TODO: unfollow that dude
+        return true;
     }
 }

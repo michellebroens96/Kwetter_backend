@@ -2,11 +2,8 @@ package Kwetter.model;
 
 import lombok.Data;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,11 +32,16 @@ public class User {
     private String token;
     private Role role = Role.USER;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "userCollections", joinColumns = {
+    @JoinColumn(name = "followers", referencedColumnName = "userId", nullable = false)}, inverseJoinColumns = {
+    @JoinColumn(name = "following", referencedColumnName = "userId", nullable = false)})
+    @ManyToMany
     private List<User> following = new ArrayList<>();
+    @ManyToMany(mappedBy = "following")
+    private List<User> followers;
 
     //methods
     public void addFollower(User follower) {
-        following.add(follower);
+        followers.add(follower);
     }
 }
