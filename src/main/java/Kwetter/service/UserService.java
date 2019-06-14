@@ -39,11 +39,11 @@ public class UserService {
         return userDAO.getRoleId(userId);
     }
 
-    public List<FollowerDTO> getFollowing(int userId) {
+    public List<UserDTO> getFollowing(int userId) {
         return userDAO.getFollowing(userId);
     }
 
-    public List<FollowerDTO> getFollowers(int userId) {
+    public List<UserDTO> getFollowers(int userId) {
         return userDAO.getFollowers(userId);
     }
 }

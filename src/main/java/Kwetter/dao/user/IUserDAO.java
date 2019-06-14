@@ -1,6 +1,5 @@
 package Kwetter.dao.user;
 
-import Kwetter.dto.FollowerDTO;
 import Kwetter.dto.UserDTO;
 import Kwetter.model.User;
 
@@ -20,9 +19,9 @@ public interface IUserDAO
 
     int getRoleId(int userId);
 
-    List<FollowerDTO> getFollowing(int userId);
+    List<UserDTO> getFollowing(int userId);
 
-    List<FollowerDTO> getFollowers(int userId);
+    List<UserDTO> getFollowers(int userId);
 
     boolean unfollowUser(int userId);
 }

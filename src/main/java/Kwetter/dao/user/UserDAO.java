@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped
@@ -92,17 +93,27 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public List<FollowerDTO> getFollowing(int userId) {
+    public List<UserDTO> getFollowing(int userId) {
         User user = getUserById(userId);
-        UserDTO userDTO = new UserDTO(user);
-        return userDTO.getFollowing();
+        List<UserDTO> userDTOS = new ArrayList<>();
+
+        for(User u: user.getFollowing()) {
+            userDTOS.add(new UserDTO(u));
+        }
+
+        return userDTOS;
     }
 
     @Override
-    public List<FollowerDTO> getFollowers(int userId) {
+    public List<UserDTO> getFollowers(int userId) {
         User user = getUserById(userId);
-        UserDTO userDTO = new UserDTO(user);
-        return userDTO.getFollowers();
+        List<UserDTO> userDTOS = new ArrayList<>();
+
+        for(User u: user.getFollowers()) {
+            userDTOS.add(new UserDTO(u));
+        }
+
+        return userDTOS;
     }
 
     @Override

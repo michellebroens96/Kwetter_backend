@@ -20,9 +20,6 @@ public class UserDTO implements Principal {
     private String image;
     private String token;
 
-    private List<FollowerDTO> followers = new ArrayList<>();
-    private List<FollowerDTO> following = new ArrayList<>();
-
     //constructors
     public UserDTO(User user) {
         this.userId = user.getUserId();
@@ -32,9 +29,6 @@ public class UserDTO implements Principal {
         this.web = user.getWeb();
         this.bio = user.getBio();
         this.image = user.getImage();
-        for(User u : user.getFollowing()) {
-            followers.add(new FollowerDTO(u.getUserId(), u.getName()));
-        }
         this.token = user.getToken();
     }
 }
