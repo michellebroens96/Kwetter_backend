@@ -1,8 +1,9 @@
 package Kwetter.endpoint;
 
 import Kwetter.dao.user.IUserDAO;
+import Kwetter.dto.UserDTO;
 import Kwetter.model.Kweet;
-import Kwetter.model.User;
+import Kwetter.service.SessionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,64 +17,58 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 @ServerEndpoint("/socket/{userId}")
 public class WebSocketEndpoint {
 
-    private final Map<Integer, Session> sessionMap = new ConcurrentHashMap<>();
-    private final ObjectMapper mapper = new ObjectMapper();
-    private int count = 0;
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    @Inject
+    private SessionService sService;
 
     @Inject
     private IUserDAO userDAO;
 
     @OnOpen
-    public void onOpened(Session session, @PathParam("userId") int userId) {
-        System.out.println(this.getClass().hashCode());
-        System.out.println("New connection inbound, previously had " + sessionMap.size());
-        System.out.println(userId + " now joined");
-        sessionMap.put(userId, session);
-        System.out.println("Count is now " + sessionMap.size());
-        count++;
-        System.out.println("Session count is now " + count);
+    public void onOpened(Session session, @PathParam("username") String username) {
+        sService.addSession(username, session);
+    }
+
+    @OnClose
+    public void onClosed(Session session, @PathParam("username") String username) {
+        sService.getSessionHashMap().remove(username);
     }
 
     @OnMessage
     public String handleTextMessage(String message) {
-        System.out.println("New Text Message Received");
         sendToAllFollowing(message);
         return message;
     }
 
-    @OnClose
-    public void onClosed(Session session, @PathParam("userId") int userId) {
-        sessionMap.remove(userId);
-    }
-
     public void sendToAllFollowing(String message) {
         try {
-            Kweet t = mapper.readValue(message, Kweet.class);
-            int placedBy = t.getUser().getUserId();
+            Kweet kweet = mapper.readValue(message, Kweet.class);
+            Integer placedBy = kweet.getUser().getUserId();
 
-            User user = userDAO.getUserById(placedBy);
-            List<User> followers = user.getFollowing();
+            List<UserDTO> followers = userDAO.getFollowers(placedBy);
 
-            followers.forEach(k->{
-                if(sessionMap.containsKey(k.getUserId())) {
+            followers.forEach( user -> {
+                if(sService.getSessionHashMap().containsKey(user.getUserId())){
                     try {
-                        sessionMap.get(k.getUserId()).getAsyncRemote().sendText(mapper.writeValueAsString(t));
-                    }
-                    catch(JsonProcessingException e) {
+                        sService.getSessionHashMap().get(user.getUserId())
+                                .getAsyncRemote()
+                                .sendText(mapper.writeValueAsString(kweet));
+                    } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
                 }
             });
-        }
-        catch(IOException e) {
-            e.printStackTrace();
+
+        } catch (IOException e) {
+            Logger.getLogger(WebSocketEndpoint.class.getName()).log(Level.SEVERE, e.getMessage());
         }
     }
 }

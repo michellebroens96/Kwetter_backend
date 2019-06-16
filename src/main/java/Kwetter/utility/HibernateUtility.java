@@ -10,7 +10,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
 
-@Singleton
+@RequestScoped
+@Default
 public class HibernateUtility {
 
     private SessionFactory sessionFactory;
