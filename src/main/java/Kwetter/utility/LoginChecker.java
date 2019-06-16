@@ -58,7 +58,7 @@ public class LoginChecker implements LoginModule {
         final char[] password = PasswordCallback.class.cast(callbacks[1]).getPassword();
 
         loginDAO = CDI.current().select(LoginDAO.class).get();
-        UserDTO user = loginDAO.login(username, new String(password));
+            UserDTO user = loginDAO.login(username, new String(password));
         if(user == null) {
             return false;
         }
