@@ -5,7 +5,6 @@ import org.hibernate.cfg.Configuration;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.Singleton;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
